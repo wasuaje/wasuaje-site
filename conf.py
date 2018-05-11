@@ -150,8 +150,8 @@ TRANSLATIONS_PATTERN = "{path}.{lang}.{ext}"
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ('/index.html', 'Home', 'icon-home'),
-        ('/archivo.html', 'Archivo', 'icon-folder-open-alt'),
-        ('/categorias/index.html', 'Categorias', 'icon-tags'),
+        ('/archive.html', 'Archivo', 'icon-folder-open-alt'),
+        ('/categories/index.html', 'Categorias', 'icon-tags'),
         ('/rss.xml', 'RSS', 'icon-rss'),
         ('http://wasuaje.com', 'Yo', 'icon-user'),
         ('https://twitter.com/SysAdmVe', 'Twitter', 'icon-twitter'),
