@@ -13,7 +13,7 @@
    :alt: Bienvenidos a wasuaje.com
 
 Luego de mucho pensarmelo, dicidí a escribir este blog de tecnologia, no prometo nada fancy
-pero si muchas de mis expericencias en este mundillo. 
+pero si muchas de mis experiencias en este mundillo. 
 
 Principalmente me gustaria escribir sobre programacion y desarrollo con todo los gustos y 
 disgustos pero tembien voy a ponerle algo de Linux, SysAdmin y DevOps en general
