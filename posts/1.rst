@@ -12,12 +12,11 @@
    :class: thumbnail
    :alt: Bienvenidos a wasuaje.com
 
-Luego de mucho pensarmelo, dicidí a escribir este blog de tecnologia, no prometo
-nada fancy pero si muchas de mis experiencias en este mundillo. 
+Luego de mucho pensármelo, decidí a escribir este blog de tecnología, no prometo nada
+fancy pero si muchas de mis experiencias en este mundillo. 
 
-Principalmente me gustaria escribir sobre programacion y desarrollo con todo los
-gustos y 
-disgustos pero tambien voy a ponerle algo de Linux, SysAdmin y DevOps en general.
+Principalmente me gustaría escribir sobre programación y desarrollo con todo los
+gustos y disgustos pero también voy a ponerle algo de Linux, SysAdmin y DevOps en general.
 
 
 Mi principales intereses:
@@ -28,5 +27,5 @@ Mi principales intereses:
 * `Kubernetes <https://kubernetes.io/>`__
 
 
-Cualquier sugerencia enviamela a wasuaje@gmail.com!
+Cualquier sugerencia enviámela a wasuaje@gmail.com!
 
