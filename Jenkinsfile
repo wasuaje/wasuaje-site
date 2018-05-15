@@ -21,7 +21,7 @@ node{
           '''
     }
 
-    stage('############### Stopping services ##################') {      
+    stage('############### Stopping servicess ##################') {      
       sh  "/usr/local/bin/docker-compose down"
     }
     
