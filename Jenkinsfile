@@ -14,7 +14,7 @@ node{
       sh '''docker run testing:latest ./test
  
       if [ $? -ne 0 ]; then
-              echo "Tests did not pass! Fix it please."
+              echo "Tests did not pass! Fix it please!"
               exit 1
       fi
        
