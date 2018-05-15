@@ -16,7 +16,7 @@ Luego de mucho pensarmelo, dicidí a escribir este blog de tecnologia, no promet
 pero si muchas de mis experiencias en este mundillo. 
 
 Principalmente me gustaria escribir sobre programacion y desarrollo con todo los gustos y 
-disgustos pero tembien voy a ponerle algo de Linux, SysAdmin y DevOps en general
+disgustos pero tambien voy a ponerle algo de Linux, SysAdmin y DevOps en general
 
 
 Mi principales intereses:
