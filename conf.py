@@ -18,7 +18,7 @@ import time
 
 # Data about this site
 BLOG_AUTHOR = "Wuelfhis Asuaje"  # (translatable)
-BLOG_TITLE = "My New Site"  # (translatable)
+BLOG_TITLE = "Mi blog de tecnología"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
 SITE_URL = "http://wasuaje.com/"
@@ -26,7 +26,7 @@ SITE_URL = "http://wasuaje.com/"
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://wasuaje.com/"
 BLOG_EMAIL = "wasuaje@gmail.com"
-BLOG_DESCRIPTION = "My first demo site"  # (translatable)
+BLOG_DESCRIPTION = "El blog que siempre quise tener ;)"  # (translatable)
 
 # Nikola is multilingual!
 #

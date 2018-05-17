@@ -1,4 +1,4 @@
-.. title: Bienvenidos a mi blog
+.. title: Bienvenidos a mi blog de tecnología
 .. slug: bienvenidos
 .. date: 2018-05-09 23:59:59 UTC-03:30
 .. tags: nikola, python, demo, blog
@@ -19,12 +19,13 @@ Principalmente me gustaría escribir sobre programación y desarrollo con todo l
 gustos y disgustos pero también voy a ponerle algo de Linux, SysAdmin y DevOps en general.
 
 
-Mi principales intereses:
+Mi principales intereses o posibles temas que estaré compartiendo:
 
 * `Python <https://python.org>`__
 * `Go Language  <https://golang.org/>`__
 * `Docker <https://www.docker.com/>`__
 * `Kubernetes <https://kubernetes.io/>`__
+* Programacion en general.
 
 
 Cualquier sugerencia enviámela a wasuaje@gmail.com!

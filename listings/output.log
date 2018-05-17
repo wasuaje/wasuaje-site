@@ -1,0 +1,10 @@
+05/17/2018 10:41:44 INFO     Inicio de mi programa
+05/17/2018 10:41:46 WARNING  Una advertencia
+05/17/2018 10:41:46 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly
+05/17/2018 10:41:46 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros
+05/17/2018 10:41:46 INFO     Fin de la diversion (por ahora)
+05/17/2018 10:42:56 INFO     Inicio de mi programa
+05/17/2018 10:42:58 WARNING  Una advertencia
+05/17/2018 10:42:58 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly
+05/17/2018 10:42:58 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros
+05/17/2018 10:43:00 INFO     Fin de la diversion (por ahora)
