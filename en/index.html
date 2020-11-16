@@ -67,8 +67,8 @@ achieve a more than decent output of our code result.</p>
 <div class="section" id="inicio">
 <h2>Inicio</h2>
 <p>We are using only 2 python's standard library modules.</p>
-<pre class="code python"><a name="rest_code_1a43bb0f3d57469aababeb04c4468cfd-1"></a><span class="kn">import</span> <span class="nn">time</span>
-<a name="rest_code_1a43bb0f3d57469aababeb04c4468cfd-2"></a><span class="kn">import</span> <span class="nn">logging</span>
+<pre class="code python"><a name="rest_code_da0566d9aed24e36b9380649a5d321f1-1"></a><span class="kn">import</span> <span class="nn">time</span>
+<a name="rest_code_da0566d9aed24e36b9380649a5d321f1-2"></a><span class="kn">import</span> <span class="nn">logging</span>
 </pre>
 </div>
 <div class="section" id="basic-config">
@@ -76,10 +76,10 @@ achieve a more than decent output of our code result.</p>
 <p>We define the basic configuration, which is the one that will be used to write to disk,
 notice we use <strong>asctime</strong>, <strong>levelname</strong> (log level) and our message. We also
 configure the default "level" and the name of the output file (can have a relative or absolute path)</p>
-<pre class="code python"><a name="rest_code_02958d3b55164f88bd005b7989983d0b-1"></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
-<a name="rest_code_02958d3b55164f88bd005b7989983d0b-2"></a>                  <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S'</span><span class="p">,</span>
-<a name="rest_code_02958d3b55164f88bd005b7989983d0b-3"></a>                  <span class="n">filename</span><span class="o">=</span><span class="s1">'output.log'</span><span class="p">,</span>
-<a name="rest_code_02958d3b55164f88bd005b7989983d0b-4"></a>                  <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_cd26ebe59efd482d9dc402624aba2a19-1"></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
+<a name="rest_code_cd26ebe59efd482d9dc402624aba2a19-2"></a>                  <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S'</span><span class="p">,</span>
+<a name="rest_code_cd26ebe59efd482d9dc402624aba2a19-3"></a>                  <span class="n">filename</span><span class="o">=</span><span class="s1">'output.log'</span><span class="p">,</span>
+<a name="rest_code_cd26ebe59efd482d9dc402624aba2a19-4"></a>                  <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 </pre>
 </div>
 <div class="section" id="console">
@@ -89,15 +89,15 @@ and the default level to <strong>INFO</strong>. Use exactly the same output form
 to use a different one for each. You can see better how <a class="reference external" href="https://docs.python.org/2/library/logging.html">logging</a>
 works in the documentation.</p>
 <p>Then we add the <strong>handler</strong> to the <strong>logging</strong> so that both happen at the same time. That is, write to disk and display in console.</p>
-<pre class="code python"><a name="rest_code_787137402f964851b40099369d589b72-1"></a><span class="n">console</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
-<a name="rest_code_787137402f964851b40099369d589b72-2"></a><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<a name="rest_code_787137402f964851b40099369d589b72-3"></a>
-<a name="rest_code_787137402f964851b40099369d589b72-4"></a><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
-<a name="rest_code_787137402f964851b40099369d589b72-5"></a>    <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
-<a name="rest_code_787137402f964851b40099369d589b72-6"></a>
-<a name="rest_code_787137402f964851b40099369d589b72-7"></a><span class="n">console</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-<a name="rest_code_787137402f964851b40099369d589b72-8"></a>
-<a name="rest_code_787137402f964851b40099369d589b72-9"></a><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-1"></a><span class="n">console</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-2"></a><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-3"></a>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-4"></a><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-5"></a>    <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-6"></a>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-7"></a><span class="n">console</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-8"></a>
+<a name="rest_code_14339b9b7f614150b8902fe3f2ce3828-9"></a><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
 </pre>
 </div>
 <div class="section" id="example">
@@ -105,75 +105,75 @@ works in the documentation.</p>
 <p>I'll show some examples of use, note that we must manually set the level of log we want to show,
 that is, the library itself can not determine when it is an error or an info or whatever.
 We must do it by ourselves depending on the possible behavior of a block of code, notice:</p>
-<pre class="code python"><a name="rest_code_84f3ba5b320f4ee2ab08b86630e40dc9-1"></a><span class="n">a</span> <span class="o">=</span> <span class="s1">'a string'</span>
-<a name="rest_code_84f3ba5b320f4ee2ab08b86630e40dc9-2"></a><span class="k">try</span><span class="p">:</span>
-<a name="rest_code_84f3ba5b320f4ee2ab08b86630e40dc9-3"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-<a name="rest_code_84f3ba5b320f4ee2ab08b86630e40dc9-4"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<a name="rest_code_84f3ba5b320f4ee2ab08b86630e40dc9-5"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'OH! There has been an error: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<pre class="code python"><a name="rest_code_642aa664613b43f2aabe32788535de99-1"></a><span class="n">a</span> <span class="o">=</span> <span class="s1">'a string'</span>
+<a name="rest_code_642aa664613b43f2aabe32788535de99-2"></a><span class="k">try</span><span class="p">:</span>
+<a name="rest_code_642aa664613b43f2aabe32788535de99-3"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="rest_code_642aa664613b43f2aabe32788535de99-4"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a name="rest_code_642aa664613b43f2aabe32788535de99-5"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'OH! There has been an error: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 </pre>
 </div>
 <div class="section" id="ah-and-the-output">
 <h2>Ah! and the output?</h2>
 <p>Finally, this is what the output of our newly configured log looks like.</p>
 <p><a class="reference external" href="../listings/output.log.html">output.log</a>  <a class="reference external" href="../listings/output.log">(Source)</a></p>
-<pre class="code console"><a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-1"></a><span class="go">05/17/2018 10:41:44 INFO     Inicio de mi programa</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-2"></a><span class="go">05/17/2018 10:41:46 WARNING  Una advertencia</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-3"></a><span class="go">05/17/2018 10:41:46 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-4"></a><span class="go">05/17/2018 10:41:46 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-5"></a><span class="go">05/17/2018 10:41:46 INFO     Fin de la diversion (por ahora)</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-6"></a><span class="go">05/17/2018 10:42:56 INFO     Inicio de mi programa</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-7"></a><span class="go">05/17/2018 10:42:58 WARNING  Una advertencia</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-8"></a><span class="go">05/17/2018 10:42:58 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-9"></a><span class="go">05/17/2018 10:42:58 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros</span>
-<a name="rest_code_e6f90a74297c45f591e5511484d9a4f1-10"></a><span class="go">05/17/2018 10:43:00 INFO     Fin de la diversion (por ahora)</span>
+<pre class="code console"><a name="rest_code_d66531ad152040da93c15ea8aa39ac67-1"></a><span class="go">05/17/2018 10:41:44 INFO     Inicio de mi programa</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-2"></a><span class="go">05/17/2018 10:41:46 WARNING  Una advertencia</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-3"></a><span class="go">05/17/2018 10:41:46 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-4"></a><span class="go">05/17/2018 10:41:46 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-5"></a><span class="go">05/17/2018 10:41:46 INFO     Fin de la diversion (por ahora)</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-6"></a><span class="go">05/17/2018 10:42:56 INFO     Inicio de mi programa</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-7"></a><span class="go">05/17/2018 10:42:58 WARNING  Una advertencia</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-8"></a><span class="go">05/17/2018 10:42:58 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-9"></a><span class="go">05/17/2018 10:42:58 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros</span>
+<a name="rest_code_d66531ad152040da93c15ea8aa39ac67-10"></a><span class="go">05/17/2018 10:43:00 INFO     Fin de la diversion (por ahora)</span>
 </pre>
 </div>
 <div class="section" id="the-code">
 <h2>The Code</h2>
 <p>Here the complete piece of code:</p>
 <p><a class="reference external" href="../listings/logging_sample_en.py.html">logging_sample_en.py</a>  <a class="reference external" href="../listings/logging_sample_en.py">(Source)</a></p>
-<pre class="code python"><a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-1"></a><span class="c1"># Don't forget to import your modules</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-2"></a><span class="kn">import</span> <span class="nn">time</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-3"></a><span class="kn">import</span> <span class="nn">logging</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-4"></a><span class="c1"># log basic conf</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-5"></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-6"></a>                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S'</span><span class="p">,</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-7"></a>                    <span class="n">filename</span><span class="o">=</span><span class="s1">'output.log'</span><span class="p">,</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-8"></a>                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-9"></a><span class="c1"># Handler which writes INFO messages or higher to the sys.stderr</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-10"></a><span class="n">console</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-11"></a><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-12"></a><span class="c1"># set a format which is simpler for console use</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-13"></a><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-14"></a>    <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-15"></a><span class="c1"># tell the handler to use this format</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-16"></a><span class="n">console</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-17"></a><span class="c1"># add the handler to the root logger</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-18"></a><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-19"></a>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-20"></a><span class="c1"># lets play</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-21"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Starting the program'</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-22"></a><span class="c1"># time delay to see better how time logging works</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-23"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-24"></a><span class="c1"># lets test a warning</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-25"></a><span class="c1"># Notice: we get to handle the severity of the logs</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-26"></a><span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'Showing a warning'</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-27"></a>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-28"></a><span class="n">a</span> <span class="o">=</span> <span class="s1">'a string'</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-29"></a><span class="k">try</span><span class="p">:</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-30"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-31"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-32"></a>    <span class="c1"># we can combine our own text with the system output</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-33"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'OH! There has been an error: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-34"></a>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-35"></a><span class="c1"># keep testing this</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-36"></a><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-37"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-38"></a>        <span class="s1">'Huston we</span><span class="se">\'</span><span class="s1">ve got a problem cannot sum strings to integers'</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-39"></a>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-40"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-41"></a><span class="c1"># end of the fun</span>
-<a name="rest_code_c5200cb4cd584fc589d1dd9dd5818f68-42"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'End of the fun (by now)'</span><span class="p">)</span>
+<pre class="code python"><a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-1"></a><span class="c1"># Don't forget to import your modules</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-2"></a><span class="kn">import</span> <span class="nn">time</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-3"></a><span class="kn">import</span> <span class="nn">logging</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-4"></a><span class="c1"># log basic conf</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-5"></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-6"></a>                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S'</span><span class="p">,</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-7"></a>                    <span class="n">filename</span><span class="o">=</span><span class="s1">'output.log'</span><span class="p">,</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-8"></a>                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-9"></a><span class="c1"># Handler which writes INFO messages or higher to the sys.stderr</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-10"></a><span class="n">console</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-11"></a><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-12"></a><span class="c1"># set a format which is simpler for console use</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-13"></a><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-14"></a>    <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-15"></a><span class="c1"># tell the handler to use this format</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-16"></a><span class="n">console</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-17"></a><span class="c1"># add the handler to the root logger</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-18"></a><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-19"></a>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-20"></a><span class="c1"># lets play</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-21"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Starting the program'</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-22"></a><span class="c1"># time delay to see better how time logging works</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-23"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-24"></a><span class="c1"># lets test a warning</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-25"></a><span class="c1"># Notice: we get to handle the severity of the logs</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-26"></a><span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'Showing a warning'</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-27"></a>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-28"></a><span class="n">a</span> <span class="o">=</span> <span class="s1">'a string'</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-29"></a><span class="k">try</span><span class="p">:</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-30"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-31"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-32"></a>    <span class="c1"># we can combine our own text with the system output</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-33"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'OH! There has been an error: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-34"></a>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-35"></a><span class="c1"># keep testing this</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-36"></a><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-37"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-38"></a>        <span class="s1">'Huston we</span><span class="se">\'</span><span class="s1">ve got a problem cannot sum strings to integers'</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-39"></a>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-40"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-41"></a><span class="c1"># end of the fun</span>
+<a name="rest_code_ce4e42e891cd41b1973d3e36f4540128-42"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'End of the fun (by now)'</span><span class="p">)</span>
 </pre>
 </div>
 </div>
