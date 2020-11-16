@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mi blog de tecnología (Publicaciones sobre demo)</title><link>http://wasuaje.com/</link><description></description><atom:link href="http://wasuaje.com/categories/demo.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2020 &lt;a href="mailto:wasuaje@gmail.com"&gt;Wuelfhis Asuaje&lt;/a&gt; </copyright><lastBuildDate>Mon, 16 Nov 2020 18:31:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Bienvenidos a mi blog de tecnología</title><link>http://wasuaje.com/posts/bienvenidos/</link><dc:creator>Wuelfhis Asuaje</dc:creator><description>&lt;div&gt;&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://www.freeiconspng.com/uploads/welcome-photos-png-31.png"&gt;&lt;img alt="Bienvenidos a wasuaje.com" class="thumbnail" src="https://www.freeiconspng.com/uploads/welcome-photos-png-31.png"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Luego de mucho pensármelo, decidí a escribir este blog de tecnología, no prometo nada
+fancy pero si muchas de mis experiencias en este mundillo.&lt;/p&gt;
+&lt;p&gt;Principalmente me gustaría escribir sobre programación y desarrollo con todo los
+gustos y disgustos pero también voy a ponerle algo de Linux, SysAdmin y DevOps en general.&lt;/p&gt;
+&lt;p&gt;Mi principales intereses o posibles temas que estaré compartiendo:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://python.org"&gt;Python&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://golang.org/"&gt;Go Language&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://www.docker.com/"&gt;Docker&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://kubernetes.io/"&gt;Kubernetes&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Programacion en general.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cualquier sugerencia enviámela a &lt;a class="reference external" href="mailto:wasuaje@gmail.com"&gt;wasuaje@gmail.com&lt;/a&gt;!&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>demo</category><category>nikola</category><category>python</category><guid>http://wasuaje.com/posts/bienvenidos/</guid><pubDate>Thu, 10 May 2018 03:29:59 GMT</pubDate></item></channel></rss>

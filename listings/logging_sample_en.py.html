@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="logging_sample_en.py">
+<meta name="viewport" content="width=device-width">
+<title>logging_sample_en.py | Mi blog de tecnología</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS (es)" href="../rss.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../en/rss.xml">
+<link rel="canonical" href="http://wasuaje.com/listings/logging_sample_en.py.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archivo"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Categorias"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="http://wasuaje.com" title="Yo"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/SysAdmVe" title="Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/wasuaje" title="Github"><i class="icon-github"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+            
+
+<nav class="breadcrumbs"><ul class="breadcrumb">
+<li><a href=".">listings</a></li>
+                <li>logging_sample_en.py</li>
+</ul></nav><h1>logging_sample_en.py
+            <small><a href="logging_sample_en.py">(Código fuente)</a></small>
+        </h1>
+    <div class="code"><table class="codetable">
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-1"><code data-line-number=" 1"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-1"></a><span class="c1"># Don't forget to import your modules</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-2"><code data-line-number=" 2"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-2"></a><span class="kn">import</span> <span class="nn">time</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-3"><code data-line-number=" 3"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-3"></a><span class="kn">import</span> <span class="nn">logging</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-4"><code data-line-number=" 4"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-4"></a><span class="c1"># log basic conf</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-5"><code data-line-number=" 5"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-5"></a><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">,</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-6"><code data-line-number=" 6"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-6"></a>                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">'%m/</span><span class="si">%d</span><span class="s1">/%Y %I:%M:%S'</span><span class="p">,</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-7"><code data-line-number=" 7"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-7"></a>                    <span class="n">filename</span><span class="o">=</span><span class="s1">'output.log'</span><span class="p">,</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-8"><code data-line-number=" 8"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-8"></a>                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-9"><code data-line-number=" 9"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-9"></a><span class="c1"># Handler which writes INFO messages or higher to the sys.stderr</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-10"><code data-line-number="10"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-10"></a><span class="n">console</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-11"><code data-line-number="11"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-11"></a><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-12"><code data-line-number="12"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-12"></a><span class="c1"># set a format which is simpler for console use</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-13"><code data-line-number="13"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-13"></a><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-14"><code data-line-number="14"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-14"></a>    <span class="s1">'</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-15"><code data-line-number="15"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-15"></a><span class="c1"># tell the handler to use this format</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-16"><code data-line-number="16"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-16"></a><span class="n">console</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-17"><code data-line-number="17"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-17"></a><span class="c1"># add the handler to the root logger</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-18"><code data-line-number="18"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-18"></a><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-19"><code data-line-number="19"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-19"></a>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-20"><code data-line-number="20"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-20"></a><span class="c1"># lets play</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-21"><code data-line-number="21"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-21"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Starting the program'</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-22"><code data-line-number="22"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-22"></a><span class="c1"># time delay to see better how time logging works</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-23"><code data-line-number="23"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-23"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-24"><code data-line-number="24"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-24"></a><span class="c1"># lets test a warning</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-25"><code data-line-number="25"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-25"></a><span class="c1"># Notice: we get to handle the severity of the logs</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-26"><code data-line-number="26"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-26"></a><span class="n">logging</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">'Showing a warning'</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-27"><code data-line-number="27"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-27"></a>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-28"><code data-line-number="28"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-28"></a><span class="n">a</span> <span class="o">=</span> <span class="s1">'a string'</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-29"><code data-line-number="29"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-29"></a><span class="k">try</span><span class="p">:</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-30"><code data-line-number="30"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-30"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-31"><code data-line-number="31"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-31"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-32"><code data-line-number="32"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-32"></a>    <span class="c1"># we can combine our own text with the system output</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-33"><code data-line-number="33"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-33"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'OH! There has been an error: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-34"><code data-line-number="34"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-34"></a>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-35"><code data-line-number="35"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-35"></a><span class="c1"># keep testing this</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-36"><code data-line-number="36"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-36"></a><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-37"><code data-line-number="37"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-37"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">fatal</span><span class="p">(</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-38"><code data-line-number="38"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-38"></a>        <span class="s1">'Huston we</span><span class="se">\'</span><span class="s1">ve got a problem cannot sum strings to integers'</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-39"><code data-line-number="39"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-39"></a>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-40"><code data-line-number="40"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-40"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-41"><code data-line-number="41"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-41"></a><span class="c1"># end of the fun</span>
+</code></td>
+</tr>
+<tr>
+<td class="linenos linenodiv"><a href="#listingslogging_sample_enpy-42"><code data-line-number="42"></code></a></td>
+<td class="code"><code><a name="listingslogging_sample_enpy-42"></a><span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'End of the fun (by now)'</span><span class="p">)</span>
+</code></td>
+</tr>
+</table></div>
+
+             
+        <footer id="footer"><p>Contents © 2020         <a href="mailto:wasuaje@gmail.com">Wuelfhis Asuaje</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+Sitemap: http://wasuaje.com/sitemapindex.xml
+
+User-Agent: *
+Host: wasuaje.com

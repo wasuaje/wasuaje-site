@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mi blog de tecnología (Publicaciones sobre python)</title><link>http://wasuaje.com/</link><description></description><atom:link href="http://wasuaje.com/categories/python.xml" rel="self" type="application/rss+xml"></atom:link><language>es</language><copyright>Contents © 2020 &lt;a href="mailto:wasuaje@gmail.com"&gt;Wuelfhis Asuaje&lt;/a&gt; </copyright><lastBuildDate>Mon, 16 Nov 2020 18:31:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Desmitificando los Logs en Python</title><link>http://wasuaje.com/posts/easy-python-logs/</link><dc:creator>Wuelfhis Asuaje</dc:creator><description>&lt;div&gt;&lt;div class="figure"&gt;
+&lt;img alt="Mantener un buen log puede ser muy útil ;)" class="bookfig" src="http://wasuaje.com/images/logging-logs-516678.jpg"&gt;
+&lt;/div&gt;
+&lt;div class="section" id="intro"&gt;
+&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;Uno de los aspectos mas importantes, y a las vez mas débiles que encontraba en python:
+era el manejo de los logs. Me parecía extraño ver como los programas estaban llenos
+de &lt;strong&gt;prints&lt;/strong&gt; que servían para dos propósitos esencialmente: debugging y como salida
+del proceso o programa en ejecución.&lt;/p&gt;
+&lt;p&gt;En un proyecto del trabajo surgió el tema de como manejar los logs de manera ordenada
+y estándar y por supuesto, luego de algo de investigación encontré la manera de lograr
+justo lo que quería: Salida por consola y a la vez escritura en disco, en un archivo
+de mi preferencia de la salida del programa:&lt;/p&gt;
+&lt;p&gt;Utilizando solo la librería &lt;a class="reference external" href="https://docs.python.org/2/library/logging.html"&gt;logging&lt;/a&gt;
+de &lt;a class="reference external" href="https://python.org"&gt;Python&lt;/a&gt; es suficiente para lograr una salida mas que decente
+del resultado de nuestro código.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="inicio"&gt;
+&lt;h2&gt;Inicio&lt;/h2&gt;
+&lt;p&gt;Para este ejemplo solo usamos dos librerías estándar de python.&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_e8000178dec947db9405ee5904bfc7e1-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;a name="rest_code_e8000178dec947db9405ee5904bfc7e1-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="configuracion-basica"&gt;
+&lt;h2&gt;Configuración Básica&lt;/h2&gt;
+&lt;p&gt;Definimos la configuración básica, que es la que se va a usar para escribir en disco,
+nótese que usamos &lt;strong&gt;asctime&lt;/strong&gt;, &lt;strong&gt;levelname&lt;/strong&gt; (log level) y nuestro mensaje. También
+configuramos el "level" por defecto y el nombre del archivo de salida (puede tener una ruta
+relativa o absoluta)&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_33d263ea856b492890b17dde669e13b2-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;basicConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;format&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)-8s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_33d263ea856b492890b17dde669e13b2-2"&gt;&lt;/a&gt;                  &lt;span class="n"&gt;datefmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'%m/&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;/%Y %I:%M:%S'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_33d263ea856b492890b17dde669e13b2-3"&gt;&lt;/a&gt;                  &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'output.log'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_33d263ea856b492890b17dde669e13b2-4"&gt;&lt;/a&gt;                  &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="consola"&gt;
+&lt;h2&gt;Consola&lt;/h2&gt;
+&lt;p&gt;Ahora viene la configuración de la consola: en lugar de &lt;strong&gt;basicConfig&lt;/strong&gt; usamos
+&lt;strong&gt;StreamHandler()&lt;/strong&gt; y el level por defecto a &lt;strong&gt;INFO&lt;/strong&gt;. Use exactamente el mismo formato de
+salida, tal vez usted quieras usar uno distinto para cada uno. Puedes ver mejor como
+funciona &lt;a class="reference external" href="https://docs.python.org/2/library/logging.html"&gt;logging&lt;/a&gt;  en la documentación.&lt;/p&gt;
+&lt;p&gt;Luego agregamos el &lt;strong&gt;handler&lt;/strong&gt; al &lt;strong&gt;logging&lt;/strong&gt; para que ambos sucedan al mismo tiempo. Es decir,
+se escriba a disco y se muestre en consola.&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;StreamHandler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Formatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-5"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)-8s&lt;/span&gt;&lt;span class="s1"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-6"&gt;&lt;/a&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setFormatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;formatter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-8"&gt;&lt;/a&gt;
+&lt;a name="rest_code_7972d6b4fc7549fe80f8c8eef453f6d7-9"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="ejemplo"&gt;
+&lt;h2&gt;Ejemplo&lt;/h2&gt;
+&lt;p&gt;Les muestro unos ejemplos de uso, nótese que manualmente debemos fijar el nivel de log
+que deseamos mostrar, es decir, la librería por si sola no puede determinar cuando
+es un error o un info o lo que sea. Debemos hacerlo por nosotros mismos dependiendo del posible
+comportamiento de un bloque de código, fijense:&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_b926c1f96dbd4589bd83b039c7b55a7c-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'a string'&lt;/span&gt;
+&lt;a name="rest_code_b926c1f96dbd4589bd83b039c7b55a7c-2"&gt;&lt;/a&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_b926c1f96dbd4589bd83b039c7b55a7c-3"&gt;&lt;/a&gt;    &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;a name="rest_code_b926c1f96dbd4589bd83b039c7b55a7c-4"&gt;&lt;/a&gt;&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;TypeError&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_b926c1f96dbd4589bd83b039c7b55a7c-5"&gt;&lt;/a&gt;    &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'OH! ha ocurrido un error: &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="ah-y-la-salida"&gt;
+&lt;h2&gt;Ah! y la salida?&lt;/h2&gt;
+&lt;p&gt;Finalmente así es como luce la salida de nuestro log recién configurado.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wasuaje.com/listings/output.log.html"&gt;output.log&lt;/a&gt;  &lt;a class="reference external" href="http://wasuaje.com/listings/output.log"&gt;(Código fuente)&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code console"&gt;&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-1"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:41:44 INFO     Inicio de mi programa&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-2"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:41:46 WARNING  Una advertencia&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-3"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:41:46 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-4"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:41:46 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-5"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:41:46 INFO     Fin de la diversion (por ahora)&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-6"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:42:56 INFO     Inicio de mi programa&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-7"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:42:58 WARNING  Una advertencia&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-8"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:42:58 ERROR    OH! Ha ocurrido un error: Can't convert 'int' object to str implicitly&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-9"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:42:58 CRITICAL Huston tenemos un problema! No podemos sumar strings y enteros&lt;/span&gt;
+&lt;a name="rest_code_32a4e0b11b3c41a885227529186a0700-10"&gt;&lt;/a&gt;&lt;span class="go"&gt;05/17/2018 10:43:00 INFO     Fin de la diversion (por ahora)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="section" id="el-codigo"&gt;
+&lt;h2&gt;El Código&lt;/h2&gt;
+&lt;p&gt;Aquí les dejo el código completo&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://wasuaje.com/listings/logging_sample.py.html"&gt;logging_sample.py&lt;/a&gt;  &lt;a class="reference external" href="http://wasuaje.com/listings/logging_sample.py"&gt;(Código fuente)&lt;/a&gt;&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-1"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# No olvidemos importar nuestros modulos&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-4"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# Configuracion basica del log&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;basicConfig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;format&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)-8s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-6"&gt;&lt;/a&gt;                    &lt;span class="n"&gt;datefmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'%m/&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt;/%Y %I:%M:%S'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-7"&gt;&lt;/a&gt;                    &lt;span class="n"&gt;filename&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'output.log'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-8"&gt;&lt;/a&gt;                    &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-9"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# Handler: escribe los mensajes a sys.etderr&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-10"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;StreamHandler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-12"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# configura un formato para la consola&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-13"&gt;&lt;/a&gt;&lt;span class="n"&gt;formatter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Formatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-14"&gt;&lt;/a&gt;    &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="si"&gt;%(asctime)s&lt;/span&gt;&lt;span class="s1"&gt; &lt;/span&gt;&lt;span class="si"&gt;%(levelname)-8s&lt;/span&gt;&lt;span class="s1"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%(message)s&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-15"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# le avisamos a la consola que formateador usar&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-16"&gt;&lt;/a&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setFormatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;formatter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-17"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# le agregamos el handler al logger principal&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-18"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-19"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# comenzamos jugar&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-20"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Inicio de mi programa'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-21"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# agreguemos un tiempo para observar mejor el log&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-22"&gt;&lt;/a&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-23"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# probamos con una advertencia&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-24"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# Nota que queda de nuestro lado establecer la severidad del log&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-25"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Una advertencia'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-26"&gt;&lt;/a&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-27"&gt;&lt;/a&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'a string'&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-28"&gt;&lt;/a&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-29"&gt;&lt;/a&gt;    &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-30"&gt;&lt;/a&gt;&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;TypeError&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-31"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# combinemos nuestro mensaje de error con la salida del interprete&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-32"&gt;&lt;/a&gt;    &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'OH! Ha ocurrido un error: &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-33"&gt;&lt;/a&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-34"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# sigamos probando como funciona esto!&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-35"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-36"&gt;&lt;/a&gt;    &lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fatal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-37"&gt;&lt;/a&gt;        &lt;span class="s1"&gt;'Huston tenemos un problema! No podemos sumar strings y enteros'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-38"&gt;&lt;/a&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-39"&gt;&lt;/a&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-40"&gt;&lt;/a&gt;&lt;span class="c1"&gt;# fin de la diversion&lt;/span&gt;
+&lt;a name="rest_code_24ec9b2111d743b68072daca4d04794c-41"&gt;&lt;/a&gt;&lt;span class="n"&gt;logging&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Fin de la diversion (por ahora)'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><category>easy</category><category>logs</category><category>python</category><guid>http://wasuaje.com/posts/easy-python-logs/</guid><pubDate>Thu, 17 May 2018 03:29:59 GMT</pubDate></item><item><title>Bienvenidos a mi blog de tecnología</title><link>http://wasuaje.com/posts/bienvenidos/</link><dc:creator>Wuelfhis Asuaje</dc:creator><description>&lt;div&gt;&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://www.freeiconspng.com/uploads/welcome-photos-png-31.png"&gt;&lt;img alt="Bienvenidos a wasuaje.com" class="thumbnail" src="https://www.freeiconspng.com/uploads/welcome-photos-png-31.png"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Luego de mucho pensármelo, decidí a escribir este blog de tecnología, no prometo nada
+fancy pero si muchas de mis experiencias en este mundillo.&lt;/p&gt;
+&lt;p&gt;Principalmente me gustaría escribir sobre programación y desarrollo con todo los
+gustos y disgustos pero también voy a ponerle algo de Linux, SysAdmin y DevOps en general.&lt;/p&gt;
+&lt;p&gt;Mi principales intereses o posibles temas que estaré compartiendo:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://python.org"&gt;Python&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://golang.org/"&gt;Go Language&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://www.docker.com/"&gt;Docker&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a class="reference external" href="https://kubernetes.io/"&gt;Kubernetes&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Programacion en general.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Cualquier sugerencia enviámela a &lt;a class="reference external" href="mailto:wasuaje@gmail.com"&gt;wasuaje@gmail.com&lt;/a&gt;!&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>demo</category><category>nikola</category><category>python</category><guid>http://wasuaje.com/posts/bienvenidos/</guid><pubDate>Thu, 10 May 2018 03:29:59 GMT</pubDate></item></channel></rss>
